@@ -1,0 +1,254 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+<style>
+  .toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    align-items: center;
+    background-color: #9b59b6;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .content {
+    margin: 82px auto 42px;
+    margin-left: 15%;    max-width: 70%;
+    padding: 0 16px;
+    width: 100%;
+    text-align: center;
+
+  }
+
+  .addValue{
+    margin: auto;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    background-color:#ecf0f1;
+  }
+  .addValue input{
+    margin: 12px;
+  }
+
+  .tablee{
+    width: 30%;
+    margin: auto;
+  }
+
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 10px 16px;
+}
+  
+.btn-lg {
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+}
+
+/***********************
+  OUTLINE BUTTONS
+************************/
+
+.btn.outline {
+    background: none;
+    padding: 12px 22px;
+}
+.btn-primary.outline {
+    border: 2px solid #0099cc;
+    color: #0099cc;
+}
+.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
+    color: #33a6cc;
+    border-color: #33a6cc;
+}
+.btn-primary.outline:active, .btn-primary.outline.active {
+    border-color: #007299;
+    color: #007299;
+    box-shadow: none;
+}
+
+/***********************
+  CUSTON BTN VALUES
+************************/
+
+.btn {
+    padding: 14px 24px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+table{
+    margin: auto;
+    min-width: 50%;   
+}
+
+table th, td{
+  text-align: center;
+  min-width: 100%;
+}
+
+td .rows1{
+    background-color: #ecf0f1;
+    color: #27ae60;
+}
+
+td .rows2{
+    background-color: #ecf0f1;
+    color: #e74c3c;
+}
+
+.spaan{
+    margin-right: 5px;
+}
+
+</style>
+
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  
+  <h1>{{ title }}</h1>
+   
+</div>
+
+<div class="content" role="main">
+  <br><br>
+    <h2>
+      Available Budget in October 2020 :  
+    </h2>
+  <br>
+     <h3 style="color:#e74c3c;" *ngIf="sum < 0">
+       The Total : {{ sum }}
+     </h3>
+     <h3 *ngIf="sum == 0">
+       The Total : {{ sum }}
+     </h3>
+     <h3 style="color:#27ae60;" *ngIf="sum > 0">
+       The Total : {{ sum }}
+     </h3>
+
+  <br>
+    <div class="form-group row">
+     <label for="example-text-input" class="col-2 col-form-label">INCOME :</label>
+      <div class="col-10">
+         <input class="form-control" type="text"  placeholder="Artisanal kale" id="example-text-input" [(ngModel)]="income">
+      </div>
+    </div>
+    <br>
+    <div class="form-group row">
+     <label for="example-text-input" class="col-2 col-form-label">EXPENSES :</label>
+      <div class="col-10">
+         <input class="form-control" type="text"  placeholder="Artisanal kale" id="example-text-input" [(ngModel)]="expenses">
+      </div>
+    </div> 
+</div>
+
+<div class="addValue">
+  <input  type="text"  placeholder="Add description" id="example-text-input" [(ngModel)]="descrption">
+  <input  type="number"  placeholder="Value" id="example-text-input" [(ngModel)]="value">
+  <button type="button" class="btn btn-primary btn-lg outline" (click)="add()">Add</button>
+</div>
+
+<br>
+<div >
+  <table class="tablee">
+
+    <tr>
+
+      <th style="color: #27ae60">
+         INCOME :
+      </th>
+
+      <th style="color: #e74c3c">
+         EXPENSES :
+      </th>
+
+    </tr>
+
+    <tr>
+
+      <td>
+        <table>
+          <tr *ngFor="let tab of empList; index as i">
+            <td>
+               <div class="rows1">
+                 <div *ngIf="tab.value > 0">
+                     <span class="spaan">Value : {{ tab.value }}, Description : {{ tab.descrption }}</span>
+                </div>
+               </div>
+            </td>
+            <td *ngIf="tab.value > 0">
+               <button type="button" class="btn btn-danger" (click)="delete(i)">Del</button>
+            </td>
+          </tr>
+        </table>
+      </td>
+
+      <td>
+        <table>
+          <tr *ngFor="let tab of empList; index as i">
+            <td>
+               <div class="rows2">
+                 <div *ngIf="tab.value <= 0" >
+                     <span class="spaan">Value : {{ tab.value }}, Description : {{ tab.descrption }}</span>
+                 </div>    
+               </div>
+            </td>
+            <td *ngIf="tab.value <= 0" >
+               <button type="button" class="btn btn-danger" (click)="delete(i)">Del</button>
+            </td>
+          </tr>
+        </table>
+      </td>
+
+    </tr>
+
+  </table>
+  
+</div>
+
+
+
